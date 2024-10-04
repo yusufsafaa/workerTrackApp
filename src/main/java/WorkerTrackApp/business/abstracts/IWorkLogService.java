@@ -7,7 +7,7 @@ import WorkerTrackApp.entities.concretes.WorkLog;
 public interface IWorkLogService {
 	Optional<WorkLog> getWorkLogById(int id);
 	
-	WorkLog create(WorkLog workLog);
+	WorkLog add(WorkLog workLog);
 	
 	WorkLog update(WorkLog workLog);
 	

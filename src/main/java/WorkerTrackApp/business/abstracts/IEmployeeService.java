@@ -8,7 +8,7 @@ import WorkerTrackApp.entities.concretes.User;
 public interface IEmployeeService {
 	Optional<Employee> getEmployeeById(int id);
 	
-	Employee create(Employee employee);
+	Employee add(Employee employee);
 	
 	Employee update(Employee employee);
 	

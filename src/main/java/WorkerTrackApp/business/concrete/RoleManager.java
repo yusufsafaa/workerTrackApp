@@ -16,7 +16,7 @@ public class RoleManager implements IRoleService {
 	private IRoleRepository roleRepository;
 
 	@Override
-	public Role create(Role role) {
+	public Role add(Role role) {
 		return roleRepository.save(role);
 	}
 

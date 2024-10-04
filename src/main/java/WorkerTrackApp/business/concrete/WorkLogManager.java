@@ -22,7 +22,7 @@ public class WorkLogManager implements IWorkLogService {
 	}
 
 	@Override
-	public WorkLog create(WorkLog workLog) {
+	public WorkLog add(WorkLog workLog) {
 		return workLogRepository.save(workLog);
 	}
 

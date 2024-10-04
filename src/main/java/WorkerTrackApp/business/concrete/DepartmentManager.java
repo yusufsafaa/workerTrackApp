@@ -15,7 +15,7 @@ public class DepartmentManager implements IDepartmentService {
 	private IDepartmentRepository departmentRepository;
 	
 	@Override
-	public Department create(Department department) {
+	public Department add(Department department) {
 		return departmentRepository.save(department);
 	}
 

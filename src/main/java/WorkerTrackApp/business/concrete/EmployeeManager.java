@@ -22,7 +22,7 @@ public class EmployeeManager implements IEmployeeService{
 	}
 
 	@Override
-	public Employee create(Employee employee) {
+	public Employee add(Employee employee) {
 		return employeeRepository.save(employee);
 	}
 

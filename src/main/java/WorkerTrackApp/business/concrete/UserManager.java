@@ -22,7 +22,7 @@ public class UserManager implements IUserService{
 	}
 
 	@Override
-	public User create(User user) {
+	public User add(User user) {
 		return userRepository.save(user);
 	}
 

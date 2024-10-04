@@ -3,7 +3,7 @@ package WorkerTrackApp.business.abstracts;
 import WorkerTrackApp.entities.concretes.Role;
 
 public interface IRoleService {
-	Role create(Role role);
+	Role add(Role role);
 	
 	void delete(int id);
 }
