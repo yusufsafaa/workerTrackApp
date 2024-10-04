@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,13 +26,15 @@ public class EmployeesController {
 	private IEmployeeService employeeService;
 	
 	@PostMapping("/add")
-    public ResponseEntity<Employee> addUser(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
         try {
             Employee savedEmployee = employeeService.add(employee);
             return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
-        } catch (Exception e) {
+        } 
+        catch (Exception exc) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        
     }
 	
 	@GetMapping("/getalldetails")
@@ -38,5 +42,17 @@ public class EmployeesController {
 		List<EmployeeDetailsDTO> result = employeeService.getAllEmployeeDetails();
 		
 		return new ResponseEntity<>(result,HttpStatus.OK);
+		
 	}
+	
+	@DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable int id) {
+        boolean isRemoved = employeeService.deleteEmployeeById(id);
+
+        if (!isRemoved)
+            return new ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
+
+        
+        return new ResponseEntity<>("Employee deleted successfully", HttpStatus.OK);
+    }
 }

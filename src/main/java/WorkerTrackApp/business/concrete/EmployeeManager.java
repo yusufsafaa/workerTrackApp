@@ -37,8 +37,13 @@ public class EmployeeManager implements IEmployeeService{
 	}
 
 	@Override
-	public void delete(int id) {
-		employeeRepository.deleteById(id);	
+	public boolean deleteEmployeeById(int id) {
+		if(employeeRepository.existsById(id)) {
+			employeeRepository.deleteById(id);
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
