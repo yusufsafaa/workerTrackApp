@@ -5,13 +5,16 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import WorkerTrackApp.business.abstracts.IEmployeeService;
 import WorkerTrackApp.entities.DTOs.EmployeeDetailsDTO;
+import WorkerTrackApp.entities.DTOs.EmployeeWorkLogsDTO;
 import WorkerTrackApp.entities.concretes.Employee;
+import WorkerTrackApp.entities.concretes.WorkLog;
 import WorkerTrackApp.repositories.abstracts.IEmployeeRepository;
 import lombok.AllArgsConstructor;
 
@@ -72,8 +75,45 @@ public class EmployeeManager implements IEmployeeService{
 	}
 
 	@Override
-	public List<Employee> getAllEmployee() {
-		return employeeRepository.findAll();
+	public List<EmployeeWorkLogsDTO> getAllEmployeeWorklogs(int year, int month) {
+		Iterable<Employee> employees = employeeRepository.findAll();
+		List<EmployeeWorkLogsDTO> resultList = new ArrayList<>();
+		
+		for (Employee employee : employees) {
+			List<WorkLog> workLogs = employee.getWorkLogs().stream()
+					.filter(workLog -> workLog.getWorkDate().getYear()==year)
+					.filter(workLog -> workLog.getWorkDate().getMonthValue()==month)
+					.collect(Collectors.toList());
+			
+			int totalWorkedHours=0;
+			int totalMissingHours=0;
+			int totalExtraHours=0;
+			int totalWorkedDays=0;
+			
+			
+			for (WorkLog wl : workLogs) {
+				totalWorkedHours+=wl.getWorkDuration();
+				totalMissingHours+=wl.getMissingTime();
+				totalExtraHours+=wl.getOverTime();
+				totalWorkedDays+=1;
+			}
+			
+			EmployeeWorkLogsDTO dto = new EmployeeWorkLogsDTO();
+			
+			dto.setId(employee.getId());
+			dto.setFirstName(employee.getFirstName());
+			dto.setLastName(employee.getLastName());
+			dto.setDepartmentName(employee.getDepartment().getName());
+			dto.setDepartmentPhoneNumber(employee.getDepartment().getPhoneNumber());
+			dto.setTotalExtraMin(totalExtraHours);
+			dto.setTotalMissingMin(totalMissingHours);
+			dto.setTotalWorkedMin(totalWorkedHours);
+			dto.setTotalWorkedDays(totalWorkedDays);
+			
+			resultList.add(dto);
+		}
+		
+		return resultList;
 	}
 
 }

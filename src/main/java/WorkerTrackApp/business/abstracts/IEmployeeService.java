@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import WorkerTrackApp.entities.DTOs.EmployeeDetailsDTO;
+import WorkerTrackApp.entities.DTOs.EmployeeWorkLogsDTO;
 import WorkerTrackApp.entities.concretes.Employee;
 
 public interface IEmployeeService {
@@ -14,8 +15,8 @@ public interface IEmployeeService {
 	Employee update(Employee employee);
 	
 	boolean deleteEmployeeById(int id);
-	
-	List<Employee> getAllEmployee();
-	
+		
 	List<EmployeeDetailsDTO> getAllEmployeeDetails();
+	
+	List<EmployeeWorkLogsDTO> getAllEmployeeWorklogs(int year, int month);
 }

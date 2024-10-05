@@ -1,6 +1,5 @@
 package WorkerTrackApp.entities.concretes;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -34,15 +33,24 @@ public class WorkLog {
 	private LocalTime chechOutTime;
 	
 	@Column(nullable = false)
-	private Duration workDuration;
+	private int workDuration;
 	
 	@Column(nullable = false)
-	private Duration overTime;
+	private int overTime;
 	
 	@Column(nullable = false)
-	private Duration missingTime;
+	private int missingTime;
 	
 	@ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
 	private Employee employee;
+
+	@Override
+	public String toString() {
+		return "WorkLog [id=" + id + ", workDate=" + workDate + ", checkInTime=" + checkInTime + ", chechOutTime="
+				+ chechOutTime + ", workDuration=" + workDuration + ", overTime=" + overTime + ", missingTime="
+				+ missingTime + "]";
+	}
+	
+	
 }

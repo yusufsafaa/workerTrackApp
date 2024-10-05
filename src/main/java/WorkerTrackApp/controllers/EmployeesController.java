@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import WorkerTrackApp.business.abstracts.IEmployeeService;
 import WorkerTrackApp.entities.DTOs.EmployeeDetailsDTO;
+import WorkerTrackApp.entities.DTOs.EmployeeWorkLogsDTO;
 import WorkerTrackApp.entities.concretes.Employee;
 import lombok.AllArgsConstructor;
 
@@ -38,11 +40,18 @@ public class EmployeesController {
     }
 	
 	@GetMapping("/getalldetails")
-	public ResponseEntity<List<EmployeeDetailsDTO>> getAllEmployee(){
+	public ResponseEntity<List<EmployeeDetailsDTO>> getAllEmployeeDetails(){
 		List<EmployeeDetailsDTO> result = employeeService.getAllEmployeeDetails();
 		
 		return new ResponseEntity<>(result,HttpStatus.OK);
 		
+	}
+	
+	@GetMapping("/getallworklogs")
+	public ResponseEntity<List<EmployeeWorkLogsDTO>> getAllEmployeeWorklogs(@RequestParam int year, @RequestParam int month){
+		List<EmployeeWorkLogsDTO> result = employeeService.getAllEmployeeWorklogs(year,month);
+		
+		return new ResponseEntity<>(result,HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
