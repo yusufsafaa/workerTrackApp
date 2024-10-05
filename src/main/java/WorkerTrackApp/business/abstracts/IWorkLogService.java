@@ -1,5 +1,6 @@
 package WorkerTrackApp.business.abstracts;
 
+import java.util.List;
 import java.util.Optional;
 
 import WorkerTrackApp.entities.concretes.WorkLog;
@@ -12,4 +13,6 @@ public interface IWorkLogService {
 	WorkLog update(WorkLog workLog);
 	
 	void delete(int id);
+	
+	List<WorkLog> getLast7DaysWorkLogsByEmployeeId(int employeeId);
 }

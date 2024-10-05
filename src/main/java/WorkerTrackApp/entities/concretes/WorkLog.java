@@ -3,6 +3,8 @@ package WorkerTrackApp.entities.concretes;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,6 +45,7 @@ public class WorkLog {
 	
 	@ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
+	@JsonIgnore
 	private Employee employee;
 
 	@Override
@@ -51,6 +54,5 @@ public class WorkLog {
 				+ chechOutTime + ", workDuration=" + workDuration + ", overTime=" + overTime + ", missingTime="
 				+ missingTime + "]";
 	}
-	
 	
 }
