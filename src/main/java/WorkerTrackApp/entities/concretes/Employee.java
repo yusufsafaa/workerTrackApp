@@ -16,6 +16,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -41,6 +42,7 @@ public class Employee {
 	private Department department;
 	
 	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, optional = true)
+	@EqualsAndHashCode.Exclude
 	private User user;
 	
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

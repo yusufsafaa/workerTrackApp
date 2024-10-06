@@ -6,6 +6,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,6 +17,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -40,7 +42,7 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_roles",
         joinColumns = @JoinColumn(name = "user_id"),
@@ -50,5 +52,6 @@ public class User {
 	
 	@OneToOne()
 	@JoinColumn(name = "employee_id", nullable = false)
+	@EqualsAndHashCode.Exclude
 	private Employee employee;
 }

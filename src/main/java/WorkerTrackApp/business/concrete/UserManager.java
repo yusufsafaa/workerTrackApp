@@ -3,6 +3,7 @@ package WorkerTrackApp.business.concrete;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import WorkerTrackApp.business.abstracts.IUserService;
@@ -15,6 +16,8 @@ import lombok.AllArgsConstructor;
 public class UserManager implements IUserService{
 	@Autowired
 	private IUserRepository userRepository;
+	@Autowired 
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public Optional<User> getUserById(int id) {
@@ -22,7 +25,9 @@ public class UserManager implements IUserService{
 	}
 
 	@Override
-	public User add(User user) {
+	public User register(User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		
 		return userRepository.save(user);
 	}
 
