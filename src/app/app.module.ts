@@ -11,13 +11,15 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { EmployeeUpdateComponent } from './components/employee-update/employee-update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeComponent,
     WorklogComponent,
-    LoginComponent
+    LoginComponent,
+    EmployeeUpdateComponent
   ],
   imports: [
     BrowserModule,

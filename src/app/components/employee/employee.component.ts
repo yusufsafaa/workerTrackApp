@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeDetails } from '../../models/employeeDetails';
 import { EmployeeService } from '../../services/employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee',
@@ -12,7 +13,9 @@ export class EmployeeComponent implements OnInit {
   selectedEmployeeId: number = 0;
   isModalOpen= false;
 
-  constructor(private employeeService:EmployeeService){}
+  constructor(private employeeService:EmployeeService,
+    private route:Router
+  ){}
   
   ngOnInit(): void {
     this.getAllEmployeeDetails();
@@ -33,8 +36,8 @@ export class EmployeeComponent implements OnInit {
     })
   }
 
-  editEmployee() {
-    throw new Error('Method not implemented.');
+  updateEmployee(id:number) {
+    this.route.navigate([`/employees/update/${id}`]);
   }
 
   openModal(employeeId: number){

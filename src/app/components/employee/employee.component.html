@@ -19,7 +19,7 @@
           <td>{{ employee.startDate }}</td>
           <td>{{ employee.workingDuration }}</td>
           <td>
-            <button class="btn btn-warning btn-sm me-2" (click)="editEmployee()">Düzenle</button>
+            <button class="btn btn-warning btn-sm me-2" (click)="updateEmployee(employee.id)">Düzenle</button>
             <button class="btn btn-danger btn-sm" (click)="openModal(employee.id)">Sil</button>
           </td>
         </tr>
