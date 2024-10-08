@@ -1,0 +1,15 @@
+<div class="login-container">
+    <div class="login-box">
+      <h2>Giriş Yap</h2>
+      <form>
+        <div class="input-group">
+          <input [(ngModel)]="username" name="username" type="text" placeholder="Kullanıcı Adı" required>
+        </div>
+        <div class="input-group">
+          <input [(ngModel)]="password" name="password" type="password" placeholder="Parola" required>
+        </div>
+        <button (click)="login()" class="login-button">Giriş yap</button>
+      </form>
+    </div>
+  </div>
+  

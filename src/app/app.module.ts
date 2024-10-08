@@ -4,16 +4,35 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { RouterModule } from '@angular/router';
+import { EmployeeComponent } from './components/employee/employee.component';
+import { WorklogComponent } from './components/worklog/worklog.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EmployeeComponent,
+    WorklogComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
