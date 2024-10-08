@@ -61,6 +61,7 @@ public class EmployeeManager implements IEmployeeService{
 			Period period = Period.between(employee.getStartDate(), referenceDate);
 			String durationText = period.getYears() + " yıl / " + period.getMonths() + " ay / " + period.getDays() + " gün";
 			
+			dto.setId(employee.getId());
 			dto.setFirstName(employee.getFirstName());
 			dto.setLastName(employee.getLastName());
 			dto.setDepartmentName(employee.getDepartment().getName());

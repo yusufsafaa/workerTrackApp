@@ -1,7 +1,5 @@
 package WorkerTrackApp.business.concrete;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Service;
 import WorkerTrackApp.business.abstracts.IAuthService;
 import WorkerTrackApp.business.abstracts.IEmployeeService;
 import WorkerTrackApp.core.config.JwtService;
-import WorkerTrackApp.entities.concretes.Employee;
 import WorkerTrackApp.entities.concretes.User;
 import WorkerTrackApp.entities.requests.LoginRequest;
 import WorkerTrackApp.entities.requests.RegisterRequest;

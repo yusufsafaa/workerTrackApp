@@ -54,8 +54,8 @@ public class EmployeesController {
 		return new ResponseEntity<>(result,HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable int id) {
+	@DeleteMapping()
+    public ResponseEntity<String> deleteEmployee(@RequestParam int id) {
         boolean isRemoved = employeeService.deleteEmployeeById(id);
 
         if (!isRemoved)

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeDetailsDTO {
+	private int id;
 	private String firstName;
 	private String lastName;
 	private DepartmentName departmentName;
