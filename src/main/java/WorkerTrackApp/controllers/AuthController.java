@@ -8,28 +8,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import WorkerTrackApp.business.abstracts.IUserService;
-import WorkerTrackApp.entities.concretes.User;
+import WorkerTrackApp.business.abstracts.IAuthService;
+import WorkerTrackApp.entities.requests.LoginRequest;
+import WorkerTrackApp.entities.requests.RegisterRequest;
+import WorkerTrackApp.entities.responses.LoginResponse;
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/register")
+@RequestMapping("/api/auth")
 public class AuthController {
 	@Autowired
-    private IUserService userService;
+    private IAuthService authService;
 
-    @PostMapping
-    public ResponseEntity<User> register(@RequestBody User user) {
-        try {
-        	User newUser = userService.register(user);
-        	return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-		} 
-        
-        catch (Exception exc) {
-        	return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-        
-        
+    @PostMapping("/register")
+    public ResponseEntity<LoginResponse> register(@RequestBody RegisterRequest request) {
+        return new ResponseEntity<>(authService.register(request),HttpStatus.OK);
     }
+    
+    
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+    	return new ResponseEntity<>(authService.login(request),HttpStatus.OK);
+    }
+    
+    
 }
