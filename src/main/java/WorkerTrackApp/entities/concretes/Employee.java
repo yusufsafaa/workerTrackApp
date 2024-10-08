@@ -3,6 +3,8 @@ package WorkerTrackApp.entities.concretes;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,12 +41,15 @@ public class Employee {
 	
 	@ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
+	@JsonIgnore
 	private Department department;
 	
 	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, optional = true)
 	@EqualsAndHashCode.Exclude
+	@JsonIgnore
 	private User user;
 	
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
 	private List<WorkLog> workLogs;
 }

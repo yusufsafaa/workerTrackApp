@@ -1,13 +1,14 @@
 package WorkerTrackApp.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import WorkerTrackApp.business.abstracts.IEmployeeService;
 import WorkerTrackApp.entities.DTOs.EmployeeDetailsDTO;
 import WorkerTrackApp.entities.DTOs.EmployeeWorkLogsDTO;
 import WorkerTrackApp.entities.concretes.Employee;
+import WorkerTrackApp.entities.requests.EmployeeUpdateRequest;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -38,6 +40,31 @@ public class EmployeesController {
         }
         
     }
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("/update")
+    public ResponseEntity<Employee> updateEmployee(@RequestBody EmployeeUpdateRequest employeeRequest) {
+        try {
+            Employee updatedEmployee = employeeService.update(employeeRequest);
+            return new ResponseEntity<>(updatedEmployee, HttpStatus.CREATED);
+        } 
+        catch (Exception exc) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
+    }
+	
+	@GetMapping("/getbyid")
+	public ResponseEntity<Employee> getById(@RequestParam int id){
+		Optional<Employee> result = employeeService.getEmployeeById(id);
+		
+		if (result.isPresent()) {
+	        return new ResponseEntity<>(result.get(), HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+		
+	}
 	
 	@GetMapping("/getalldetails")
 	public ResponseEntity<List<EmployeeDetailsDTO>> getAllEmployeeDetails(){

@@ -13,8 +13,11 @@ import org.springframework.stereotype.Service;
 import WorkerTrackApp.business.abstracts.IEmployeeService;
 import WorkerTrackApp.entities.DTOs.EmployeeDetailsDTO;
 import WorkerTrackApp.entities.DTOs.EmployeeWorkLogsDTO;
+import WorkerTrackApp.entities.concretes.Department;
 import WorkerTrackApp.entities.concretes.Employee;
 import WorkerTrackApp.entities.concretes.WorkLog;
+import WorkerTrackApp.entities.requests.EmployeeUpdateRequest;
+import WorkerTrackApp.repositories.abstracts.IDepartmentRepository;
 import WorkerTrackApp.repositories.abstracts.IEmployeeRepository;
 import lombok.AllArgsConstructor;
 
@@ -23,6 +26,8 @@ import lombok.AllArgsConstructor;
 public class EmployeeManager implements IEmployeeService{
 	@Autowired
 	private IEmployeeRepository employeeRepository;
+	@Autowired
+	private IDepartmentRepository departmentRepository;
 	
 	@Override
 	public Optional<Employee> getEmployeeById(int id) {
@@ -35,8 +40,20 @@ public class EmployeeManager implements IEmployeeService{
 	}
 
 	@Override
-	public Employee update(Employee employee) {
-		return employeeRepository.save(employee);
+	public Employee update(EmployeeUpdateRequest employeeRequest) {
+		Optional<Employee> user = employeeRepository.findById(employeeRequest.getId());
+		if(user.isPresent()) {
+			user.get().setFirstName(employeeRequest.getFirstName());
+			user.get().setLastName(employeeRequest.getLastName());
+			user.get().setStartDate(employeeRequest.getStartDate());
+			
+			Optional<Department> department = departmentRepository.findById(employeeRequest.getDepartmentId());
+			if(department.isPresent()) {
+				user.get().setDepartment(department.get());
+			}
+			return employeeRepository.save(user.get());
+		}
+		return null;
 	}
 
 	@Override
