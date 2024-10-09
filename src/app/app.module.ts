@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { EmployeeUpdateComponent } from './components/employee-update/employee-update.component';
+import { EmployeeAddComponent } from './components/employee-add/employee-add.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EmployeeUpdateComponent } from './components/employee-update/employee-u
     EmployeeComponent,
     WorklogComponent,
     LoginComponent,
-    EmployeeUpdateComponent
+    EmployeeUpdateComponent,
+    EmployeeAddComponent
   ],
   imports: [
     BrowserModule,

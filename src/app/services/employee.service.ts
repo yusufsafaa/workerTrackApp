@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EmployeeDetails } from '../models/employeeDetails';
 import { EmployeeModel } from '../models/employeeModel';
+import { EmployeeAddModel } from '../models/employeeAddModel';
 
 
 @Injectable({
@@ -12,6 +13,10 @@ export class EmployeeService {
   private apiUrl = 'http://localhost:8080/api/employees';
 
   constructor(private httpClient:HttpClient) { }
+
+  addEmployee(employee:EmployeeAddModel){
+    return this.httpClient.post(this.apiUrl+"/add",employee);
+  }
 
   getAllEmployeeDetails():Observable<EmployeeDetails[]>{
     return this.httpClient.get<EmployeeDetails[]>(this.apiUrl + '/getalldetails');

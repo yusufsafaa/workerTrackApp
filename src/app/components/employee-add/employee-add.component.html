@@ -1,7 +1,7 @@
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Çalışan Güncelle</h2>
+    <h2 class="text-center mb-4">Çalışan Ekle</h2>
     
-    <form (ngSubmit)="update()" #updateEmployeeForm="ngForm">
+    <form (ngSubmit)="add()" #addEmployeeForm="ngForm">
       <div class="form-group">
         <label for="firstName">Ad</label>
         <input type="text" id="firstName" class="form-control" [(ngModel)]="employeeModel.firstName" name="firstName" required/>
@@ -22,7 +22,7 @@
         <input type="date" id="startDate" class="form-control" [(ngModel)]="employeeModel.startDate" name="startDate" required/>
       </div>
       
-      <button type="submit" class="btn btn-primary mt-3" [disabled]="!updateEmployeeForm.form.valid">Güncelle</button>
+      <button type="submit" class="btn btn-primary mt-3" [disabled]="!addEmployeeForm.form.valid">Ekle</button>
     </form>
   </div>
   
