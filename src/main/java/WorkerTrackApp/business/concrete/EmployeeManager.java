@@ -16,6 +16,7 @@ import WorkerTrackApp.entities.DTOs.EmployeeWorkLogsDTO;
 import WorkerTrackApp.entities.concretes.Department;
 import WorkerTrackApp.entities.concretes.Employee;
 import WorkerTrackApp.entities.concretes.WorkLog;
+import WorkerTrackApp.entities.requests.EmployeeAddRequest;
 import WorkerTrackApp.entities.requests.EmployeeUpdateRequest;
 import WorkerTrackApp.repositories.abstracts.IDepartmentRepository;
 import WorkerTrackApp.repositories.abstracts.IEmployeeRepository;
@@ -35,7 +36,18 @@ public class EmployeeManager implements IEmployeeService{
 	}
 
 	@Override
-	public Employee add(Employee employee) {
+	public Employee add(EmployeeAddRequest employeeRequest) {
+		Employee employee = new Employee();
+		employee.setFirstName(employeeRequest.getFirstName());
+		employee.setLastName(employeeRequest.getLastName());
+		employee.setStartDate(employeeRequest.getStartDate());
+		
+		Optional<Department> department = departmentRepository.findById(employeeRequest.getDepartmentId());
+		
+		if (department.isPresent()) {
+			employee.setDepartment(department.get());
+		}
+		
 		return employeeRepository.save(employee);
 	}
 

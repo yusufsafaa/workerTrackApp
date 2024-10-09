@@ -19,6 +19,7 @@ import WorkerTrackApp.business.abstracts.IEmployeeService;
 import WorkerTrackApp.entities.DTOs.EmployeeDetailsDTO;
 import WorkerTrackApp.entities.DTOs.EmployeeWorkLogsDTO;
 import WorkerTrackApp.entities.concretes.Employee;
+import WorkerTrackApp.entities.requests.EmployeeAddRequest;
 import WorkerTrackApp.entities.requests.EmployeeUpdateRequest;
 import lombok.AllArgsConstructor;
 
@@ -30,7 +31,7 @@ public class EmployeesController {
 	private IEmployeeService employeeService;
 	
 	@PostMapping("/add")
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> addEmployee(@RequestBody EmployeeAddRequest employee) {
         try {
             Employee savedEmployee = employeeService.add(employee);
             return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
