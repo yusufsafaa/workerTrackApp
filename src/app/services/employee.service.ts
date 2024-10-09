@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { EmployeeDetails } from '../models/employeeDetails';
 import { EmployeeModel } from '../models/employeeModel';
 import { EmployeeAddModel } from '../models/employeeAddModel';
+import { EmployeeWorklogsDetails } from '../models/employeeWorklogsDetails';
 
 
 @Injectable({
@@ -32,5 +33,9 @@ export class EmployeeService {
 
   updateEmployee(employee:EmployeeModel){
     return this.httpClient.post(this.apiUrl+"/update", employee);
+  }
+
+  getAllEmployeeWorklogs(year:number, month:number):Observable<EmployeeWorklogsDetails[]>{
+    return this.httpClient.get<EmployeeWorklogsDetails[]>(this.apiUrl+`/getallworklogs?year=${year}&month=${month}`);
   }
 }
