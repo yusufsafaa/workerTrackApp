@@ -7,12 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import WorkerTrackApp.business.abstracts.IWorkLogService;
 import WorkerTrackApp.entities.concretes.WorkLog;
+import WorkerTrackApp.entities.requests.WorklogAddRequest;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -38,5 +41,17 @@ public class WorkLogsController {
 
         
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+	
+	@PostMapping("/add")
+    public ResponseEntity<WorkLog> addWorklog(@RequestBody WorklogAddRequest worklog, @RequestParam int employeeId) {
+        try {
+            WorkLog savedWorklog = workLogService.add(worklog,employeeId);
+            return new ResponseEntity<>(savedWorklog, HttpStatus.CREATED);
+        } 
+        catch (Exception exc) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
     }
 }

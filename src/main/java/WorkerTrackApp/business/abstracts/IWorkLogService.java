@@ -4,11 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import WorkerTrackApp.entities.concretes.WorkLog;
+import WorkerTrackApp.entities.requests.WorklogAddRequest;
 
 public interface IWorkLogService {
 	Optional<WorkLog> getWorkLogById(int id);
 	
-	WorkLog add(WorkLog workLog);
+	WorkLog add(WorklogAddRequest workLog, int employeeId);
 	
 	WorkLog update(WorkLog workLog);
 	

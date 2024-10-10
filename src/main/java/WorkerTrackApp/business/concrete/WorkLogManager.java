@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import WorkerTrackApp.business.abstracts.IWorkLogService;
+import WorkerTrackApp.entities.concretes.Employee;
 import WorkerTrackApp.entities.concretes.WorkLog;
+import WorkerTrackApp.entities.requests.WorklogAddRequest;
+import WorkerTrackApp.repositories.abstracts.IEmployeeRepository;
 import WorkerTrackApp.repositories.abstracts.IWorkLogRepository;
 import lombok.AllArgsConstructor;
 
@@ -17,6 +20,8 @@ import lombok.AllArgsConstructor;
 public class WorkLogManager implements IWorkLogService {
 	@Autowired
 	private IWorkLogRepository workLogRepository;
+	@Autowired 
+	private IEmployeeRepository employeeRepository;
 
 	@Override
 	public Optional<WorkLog> getWorkLogById(int id) {
@@ -24,7 +29,21 @@ public class WorkLogManager implements IWorkLogService {
 	}
 
 	@Override
-	public WorkLog add(WorkLog workLog) {
+	public WorkLog add(WorklogAddRequest request, int employeeId) {
+		WorkLog workLog= new WorkLog();
+		workLog.setWorkDate(request.getWorkDate());
+		workLog.setCheckInTime(request.getCheckInTime());
+		workLog.setChechOutTime(request.getChechOutTime());
+		workLog.setWorkDuration(request.getWorkDuration());
+		workLog.setOverTime(request.getOverTime());
+		workLog.setMissingTime(request.getMissingTime());
+		
+		Optional<Employee> emp = employeeRepository.findById(employeeId);
+		
+		if(emp.isPresent()) {
+			workLog.setEmployee(emp.get());
+		}
+		
 		return workLogRepository.save(workLog);
 	}
 
