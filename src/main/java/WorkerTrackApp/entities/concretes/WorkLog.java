@@ -47,12 +47,4 @@ public class WorkLog {
     @JoinColumn(name = "employee_id", nullable = false)
 	@JsonIgnore
 	private Employee employee;
-
-	@Override
-	public String toString() {
-		return "WorkLog [id=" + id + ", workDate=" + workDate + ", checkInTime=" + checkInTime + ", chechOutTime="
-				+ chechOutTime + ", workDuration=" + workDuration + ", overTime=" + overTime + ", missingTime="
-				+ missingTime + "]";
-	}
-	
 }

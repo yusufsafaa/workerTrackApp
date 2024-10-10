@@ -49,7 +49,7 @@ public class Employee {
 	@JsonIgnore
 	private User user;
 	
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<WorkLog> workLogs;
 }

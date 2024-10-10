@@ -87,9 +87,9 @@ public class EmployeesController {
         boolean isRemoved = employeeService.deleteEmployeeById(id);
 
         if (!isRemoved)
-            return new ResponseEntity<>("Employee not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         
-        return new ResponseEntity<>("Employee deleted successfully", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

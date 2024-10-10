@@ -12,7 +12,7 @@ public interface IWorkLogService {
 	
 	WorkLog update(WorkLog workLog);
 	
-	void delete(int id);
+	boolean delete(int id);
 	
 	List<WorkLog> getLast7DaysWorkLogsByEmployeeId(int employeeId);
 }

@@ -35,8 +35,13 @@ public class WorkLogManager implements IWorkLogService {
 	}
 
 	@Override
-	public void delete(int id) {
-		workLogRepository.deleteById(id);
+	public boolean delete(int id) {
+		if(workLogRepository.existsById(id)) {
+			workLogRepository.deleteById(id);
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
