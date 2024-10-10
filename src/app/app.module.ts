@@ -14,6 +14,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { EmployeeUpdateComponent } from './components/employee-update/employee-update.component';
 import { EmployeeAddComponent } from './components/employee-add/employee-add.component';
 import { EmployeeWorklogDetailComponent } from './components/employee-worklog-detail/employee-worklog-detail.component';
+import { EmployeeWorklogAddComponent } from './components/employee-worklog-add/employee-worklog-add.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EmployeeWorklogDetailComponent } from './components/employee-worklog-de
     LoginComponent,
     EmployeeUpdateComponent,
     EmployeeAddComponent,
-    EmployeeWorklogDetailComponent
+    EmployeeWorklogDetailComponent,
+    EmployeeWorklogAddComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,38 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Yeni Kayıt Ekle</h2>
+    
+    <form (ngSubmit)="addWorklog()" #addWorklogForm="ngForm">
+      <div class="form-group">
+        <label for="workDate">Tarih</label>
+        <input type="date" id="workDate" class="form-control" [(ngModel)]="worklogModel.workDate" name="workDate" required/>
+      </div>
+      
+      <div class="form-group">
+        <label for="checkInTime">İşe Giriş Saati</label>
+        <input type="time" id="checkInTime" class="form-control" [(ngModel)]="worklogModel.checkInTime" name="checkInTime" required/>
+      </div>
+      
+      <div class="form-group">
+        <label for="chechOutTime">İşten Çıkış Saati</label>
+        <input type="time" id="chechOutTime" class="form-control" [(ngModel)]="worklogModel.chechOutTime" name="chechOutTime" required/>
+      </div>
+      
+      <div class="form-group">
+        <label for="workDuration">Çalışma Süresi</label>
+        <input type="number" id="workDuration" class="form-control" [(ngModel)]="worklogModel.workDuration" name="workDuration" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="overTime">Fazladan Çalışma Süresi</label>
+        <input type="number" id="overTime" class="form-control" [(ngModel)]="worklogModel.overTime" name="overTime" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="missingTime">Eksik Çalışma Süresi</label>
+        <input type="number" id="missingTime" class="form-control" [(ngModel)]="worklogModel.missingTime" name="missingTime" required/>
+      </div>
+      
+      <button type="submit" class="btn btn-primary mt-3" [disabled]="!addWorklogForm.form.valid">Ekle</button>
+    </form>
+  </div>
+  

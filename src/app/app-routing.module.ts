@@ -7,6 +7,7 @@ import { AuthGuard } from './services/auth.guard';
 import { EmployeeUpdateComponent } from './components/employee-update/employee-update.component';
 import { EmployeeAddComponent } from './components/employee-add/employee-add.component';
 import { EmployeeWorklogDetailComponent } from './components/employee-worklog-detail/employee-worklog-detail.component';
+import { EmployeeWorklogAddComponent } from './components/employee-worklog-add/employee-worklog-add.component';
 
 const routes: Routes = [
   {path:'login', component:LoginComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path:'employees/add', component:EmployeeAddComponent, canActivate:[AuthGuard] },
   {path:'worklogs', component:WorklogComponent, canActivate:[AuthGuard] },
   {path:'worklogs/employee/:employeeId', component:EmployeeWorklogDetailComponent, canActivate:[AuthGuard] },
+  {path:'worklogs/employee/:employeeId/add', component:EmployeeWorklogAddComponent, canActivate:[AuthGuard] },
   {path:'', redirectTo:'/login', pathMatch:'full'}
 ];
 

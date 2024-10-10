@@ -18,4 +18,8 @@ export class WorklogService {
   deleteWorklog(id:number){
     return this.httpClient.delete(this.apiUrl+ '?id='+id);
   }
+
+  addWorklogByEmployeeId(worklogModel:WorklogModel,employeeId:number){
+    return this.httpClient.post(this.apiUrl+`/add?employeeId=${employeeId}`, worklogModel);
+  }
 }
