@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
 import { EmployeeWorklogsDetails } from '../../models/employeeWorklogsDetails';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-worklog',
@@ -27,7 +28,9 @@ export class WorklogComponent {
     {name:'Aralık', value:12}
   ];
 
-  constructor(private employeeService:EmployeeService){}
+  constructor(private employeeService:EmployeeService,
+    private route:Router
+  ){}
 
   getEmployeesWorklogs(){
     this.employeeService.getAllEmployeeWorklogs(this.selectedYear,this.selectedMonth).subscribe(data => {
@@ -36,6 +39,10 @@ export class WorklogComponent {
     () => {
       console.log("HATA!");
     })
+  }
+
+  getEmployeeWorklogDetails(employeeId:number){
+    this.route.navigate([`/worklogs/employee/${employeeId}`]);
   }
 
 }

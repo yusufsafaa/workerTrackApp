@@ -29,10 +29,10 @@ export class EmployeeComponent implements OnInit {
 
   deleteEmployee(id:number) {
     this.employeeService.deleteEmployeeById(id).subscribe(() => {
-      console.log(`Employee ${id} silindi`);
+      console.log(`Employee silindi id:${id}`);
     },
-    () => {
-      console.log(`Employee ${id} silinemedi. HATA!`);
+    (error) => {
+      console.log(error);
     })
   }
 

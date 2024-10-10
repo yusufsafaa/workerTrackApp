@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { EmployeeUpdateComponent } from './components/employee-update/employee-update.component';
 import { EmployeeAddComponent } from './components/employee-add/employee-add.component';
+import { EmployeeWorklogDetailComponent } from './components/employee-worklog-detail/employee-worklog-detail.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EmployeeAddComponent } from './components/employee-add/employee-add.com
     WorklogComponent,
     LoginComponent,
     EmployeeUpdateComponent,
-    EmployeeAddComponent
+    EmployeeAddComponent,
+    EmployeeWorklogDetailComponent
   ],
   imports: [
     BrowserModule,

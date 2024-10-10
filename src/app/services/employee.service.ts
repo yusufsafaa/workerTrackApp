@@ -5,6 +5,7 @@ import { EmployeeDetails } from '../models/employeeDetails';
 import { EmployeeModel } from '../models/employeeModel';
 import { EmployeeAddModel } from '../models/employeeAddModel';
 import { EmployeeWorklogsDetails } from '../models/employeeWorklogsDetails';
+import { ResponseModel } from '../models/responseModel';
 
 
 @Injectable({
@@ -27,8 +28,8 @@ export class EmployeeService {
     return this.httpClient.get<EmployeeModel>(this.apiUrl+"/getbyid"+"?id="+id);
   }
 
-  deleteEmployeeById(employeeId:number):Observable<any>{
-    return this.httpClient.delete<any>(this.apiUrl+ '?id='+employeeId);
+  deleteEmployeeById(employeeId:number){
+    return this.httpClient.delete(this.apiUrl+ '?id='+employeeId);
   }
 
   updateEmployee(employee:EmployeeModel){

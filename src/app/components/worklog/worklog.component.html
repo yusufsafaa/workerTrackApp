@@ -40,20 +40,9 @@
                 <td>{{ employee.totalMissingMin }}</td>
                 <td>{{ employee.totalExtraMin }}</td>
                 <td>
-                    <!-- <button class="btn btn-warning btn-sm me-2" (click)="updateEmployee(employee.id)">Düzenle</button>
-                    <button class="btn btn-danger btn-sm" (click)="openModal(employee.id)">Sil</button> -->
+                    <button class="btn btn-warning btn-sm me-2" (click)="getEmployeeWorklogDetails(employee.id)">Ayrıntılı Gör</button>
                 </td>
             </tr>
         </tbody>
     </table>
-
-    <!-- Silme İşlemi İçin Modal -->
-    <!-- <div *ngIf="isModalOpen" class="modal">
-        <div class="modal-content">
-            <h2>Silme İşlemi</h2>
-            <p>Bu çalışanı silmek istediğinizden emin misiniz?</p>
-            <button (click)="closeModal()" class="btn btn-secondary">Hayır</button>
-            <button (click)="deleteEmployee(selectedEmployeeId)" (click)="closeModal()" routerLink="/employees" class="btn btn-danger">Evet</button>
-        </div>
-    </div> -->
 </div>
