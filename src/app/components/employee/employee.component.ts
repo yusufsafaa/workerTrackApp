@@ -10,8 +10,13 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './employee.component.css'
 })
 export class EmployeeComponent implements OnInit {
-  employeeDetails: EmployeeDetails[] = [];
+  employeeDetails: EmployeeDetails[]=[];
+  paginatedEmployees: EmployeeDetails[]=[]
+
   selectedEmployeeId: number = 0;
+  currentPage:number = 1;
+  pageSize:number = 10;
+  totalPages:number = 0;
   isModalOpen= false;
 
   constructor(private employeeService:EmployeeService,
@@ -26,7 +31,15 @@ export class EmployeeComponent implements OnInit {
   getAllEmployeeDetails(){
     this.employeeService.getAllEmployeeDetails().subscribe(response => {
       this.employeeDetails = response
+      this.totalPages= Math.ceil(this.employeeDetails.length / this.pageSize);
+      this.updatePaginatedEmployees()
     });
+  }
+
+  updatePaginatedEmployees(){
+    const startIndex= (this.currentPage - 1) * this.pageSize ;
+    const endIndex= startIndex + this.pageSize;
+    this.paginatedEmployees= this.employeeDetails.slice(startIndex, endIndex);
   }
 
   deleteEmployee(id:number) {
@@ -42,12 +55,26 @@ export class EmployeeComponent implements OnInit {
     this.route.navigate([`/employees/update/${id}`]);
   }
 
-  openModal(employeeId: number){
+  goToNextPage(){
+    if(this.currentPage < this.totalPages){
+      this.currentPage++;
+      this.updatePaginatedEmployees();
+    }
+  }
+
+  goToPreviousPage(){
+    if(this.currentPage > 1){
+      this.currentPage--;
+      this.updatePaginatedEmployees();
+    }
+  }
+
+  openDeleteModal(employeeId: number){
     this.isModalOpen = true;
     this.selectedEmployeeId = employeeId;
   }
 
-  closeModal(){
+  closeDeleteModal(){
     this.isModalOpen = false;
   }
 }

@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let employee of employeeDetails">
+        <tr *ngFor="let employee of paginatedEmployees">
           <td>{{ employee.firstName }} {{ employee.lastName }}</td>
           <td>{{ employee.departmentName }}</td>
           <td>{{ employee.departmentPhoneNumber }}</td>
@@ -21,18 +21,24 @@
           <td>{{ employee.workingDuration }}</td>
           <td *ngIf="authService.hasRole('ADMIN')">
             <button class="btn btn-warning btn-sm me-2" (click)="updateEmployee(employee.id)">Düzenle</button>
-            <button class="btn btn-danger btn-sm" (click)="openModal(employee.id)">Sil</button>
+            <button class="btn btn-danger btn-sm" (click)="openDeleteModal(employee.id)">Sil</button>
           </td>
         </tr>
       </tbody>
     </table>
 
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <button class="btn btn-secondary" (click)="goToPreviousPage()" [disabled]="currentPage === 1">Önceki</button>
+        <span>Sayfa {{currentPage}} / {{totalPages}}</span>
+        <button class="btn btn-secondary" (click)="goToNextPage()" [disabled]="currentPage === totalPages">Sonraki</button>
+    </div>
+
     <div *ngIf="isModalOpen" class="modal">
         <div class="modal-content">
           <h2>Silme İşlemi</h2>
           <p>Bu çalışanı silmek istediğinizden emin misiniz?</p>
-          <button (click)="closeModal()" class="btn btn-secondary">Hayır</button>
-          <button (click)="deleteEmployee(selectedEmployeeId)" (click)="closeModal()" routerLink="/employees" class="btn btn-danger">Evet</button>
+          <button (click)="closeDeleteModal()" class="btn btn-secondary">Hayır</button>
+          <button (click)="deleteEmployee(selectedEmployeeId)" (click)="closeDeleteModal()" routerLink="/employees" class="btn btn-danger">Evet</button>
         </div>
     </div>
 </div>
