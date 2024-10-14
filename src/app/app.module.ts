@@ -16,6 +16,8 @@ import { EmployeeAddComponent } from './components/employee-add/employee-add.com
 import { EmployeeWorklogDetailComponent } from './components/employee-worklog-detail/employee-worklog-detail.component';
 import { EmployeeWorklogAddComponent } from './components/employee-worklog-add/employee-worklog-add.component';
 import { EmployeeWorklogUpdateComponent } from './components/employee-worklog-update/employee-worklog-update.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,11 @@ import { EmployeeWorklogUpdateComponent } from './components/employee-worklog-up
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    })
   ],
   providers: [
     provideClientHydration(),

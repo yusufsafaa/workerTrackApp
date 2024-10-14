@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
 import { EmployeeWorklogsDetails } from '../../models/employeeWorklogsDetails';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-worklog',
@@ -29,7 +30,8 @@ export class WorklogComponent {
   ];
 
   constructor(private employeeService:EmployeeService,
-    private route:Router
+    private route:Router,
+    private toastrService:ToastrService
   ){}
 
   getEmployeesWorklogs(){
@@ -37,7 +39,7 @@ export class WorklogComponent {
       this.employeeWorklogs=data;
     },
     () => {
-      console.log("HATA!");
+      this.toastrService.error("Hata!")
     })
   }
 

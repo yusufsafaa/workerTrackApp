@@ -12,12 +12,16 @@ import { Role } from '../models/role';
 export class AuthService {
   apiUrl = 'http://localhost:8080/api/auth'
   roles: Role[]=[];
+  username:string=""
 
   constructor(private httpClient:HttpClient) {
-    const token = localStorage.getItem('token');
+    let token:string | null =""
+    if(this.isBrowser())
+      token = localStorage.getItem('token');
     if(token){
       const decodedToken= jwt_decode.jwtDecode<DecodedToken>(token);
       this.roles = decodedToken.roles || [];
+      this.username = decodedToken.sub || '';
     }
    }
 
@@ -26,18 +30,31 @@ export class AuthService {
   }
 
   saveToken(token: string){
-    localStorage.setItem('token', token);
+    if(this.isBrowser())
+      localStorage.setItem('token', token);
   }
 
   getToken(){
-    return localStorage.getItem('token');
+    if(this.isBrowser())
+      return localStorage.getItem('token');
+    
+    return null;
   }
 
   logout(){
-    localStorage.removeItem('token');
+    if(this.isBrowser())
+      localStorage.removeItem('token');
   }
 
   hasRole(roleName:string):boolean{
     return this.roles.some(role => role.authority === `ROLE_${roleName}`);
+  }
+
+  getUsername(){
+    return this.username;
+  }
+
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 }

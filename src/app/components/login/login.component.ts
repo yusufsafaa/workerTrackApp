@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,16 +13,17 @@ export class LoginComponent {
   password: string = '';
 
   constructor(private authService:AuthService,
-    private router:Router){}
+    private router:Router,
+    private toastrService:ToastrService){}
 
   login() {
     this.authService.login(this.username, this.password).subscribe((response) => {
         this.authService.saveToken(response.token)
-        
+        this.toastrService.info(`Kullanıcı Adı: ${this.username}`,"Hoşgeldiniz!")
         this.router.navigate(['/employees']);
       },
       (error) => {
-        console.error('Login failed', error);
+        this.toastrService.error("Kullanıcı adı veya parolanız hatalı!","Hatalı Giriş!")
       }
     );
   }

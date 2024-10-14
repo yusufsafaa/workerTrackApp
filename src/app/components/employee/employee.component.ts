@@ -3,6 +3,7 @@ import { EmployeeDetails } from '../../models/employeeDetails';
 import { EmployeeService } from '../../services/employee.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee',
@@ -21,7 +22,8 @@ export class EmployeeComponent implements OnInit {
 
   constructor(private employeeService:EmployeeService,
     protected authService:AuthService,
-    private route:Router
+    private route:Router,
+    private toastrService:ToastrService
   ){}
   
   ngOnInit(): void {
@@ -44,10 +46,10 @@ export class EmployeeComponent implements OnInit {
 
   deleteEmployee(id:number) {
     this.employeeService.deleteEmployeeById(id).subscribe(() => {
-      console.log(`Employee silindi id:${id}`);
+      this.toastrService.info(`Employee silindi id:${id}`,"İşlem Başarılı");
     },
     (error) => {
-      console.log(error);
+      this.toastrService.error("Employee silinemedi","Hata!");
     })
   }
 

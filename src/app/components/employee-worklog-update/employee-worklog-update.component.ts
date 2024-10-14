@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WorklogService } from '../../services/worklog.service';
 import { WorklogModel } from '../../models/worklogModel';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-worklog-update',
@@ -19,7 +20,8 @@ export class EmployeeWorklogUpdateComponent implements OnInit{
     missingTime:0
   }
   constructor(private worklogService:WorklogService,
-    private route:ActivatedRoute){
+    private route:ActivatedRoute,
+    private toastrService:ToastrService){
     this.worklogModel.id = Number(this.route.snapshot.paramMap.get('worklogId'));
   }
 
@@ -35,10 +37,10 @@ export class EmployeeWorklogUpdateComponent implements OnInit{
 
   update(){
     this.worklogService.updateWorklog(this.worklogModel).subscribe(() => {
-      console.log(`Worklog id:${this.worklogModel.id} güncellendi`);
+      this.toastrService.success("İş kaydı güncellendi","İşlem Başarılı!")
     },
      (error) => {
-      console.log(error);
+      this.toastrService.error("İş kaydı güncellenemedi","Hata!")
     })
   }
 }

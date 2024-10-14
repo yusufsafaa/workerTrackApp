@@ -15,6 +15,7 @@
           </li>
         </ul>
         <form class="d-flex">
+          <span class="navbar-text text-light me-3">Hoşgeldiniz, {{ authService.getUsername() }}</span>
           <button class="btn btn-outline-danger" routerLink="/login" (click)="logout()" type="button">Çıkış Yap</button>
         </form>
       </div>

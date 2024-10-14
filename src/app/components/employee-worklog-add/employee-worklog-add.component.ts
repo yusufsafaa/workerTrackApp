@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WorklogModel } from '../../models/worklogModel';
 import { WorklogService } from '../../services/worklog.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-worklog-add',
@@ -14,7 +15,8 @@ export class EmployeeWorklogAddComponent implements OnInit{
 
   constructor(private worklogService:WorklogService,
     private route:ActivatedRoute,
-    private router:Router
+    private router:Router,
+    private toastrService:ToastrService
   ){}
 
   ngOnInit(): void {
@@ -23,11 +25,11 @@ export class EmployeeWorklogAddComponent implements OnInit{
 
   addWorklog(){
     this.worklogService.addWorklogByEmployeeId(this.worklogModel,this.employeeId).subscribe((response) => {
-      console.log(response);
+      this.toastrService.success("İş kaydı oluşturuldu","İşlem Başarılı!");
       this.goToWorklogDetailsBack();
     },
     (error) => {
-      console.log(error);
+      this.toastrService.error("İş kaydı eklenemedi","Hata!");
     })
   }
 

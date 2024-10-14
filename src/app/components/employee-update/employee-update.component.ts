@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeModel} from '../../models/employeeModel';
 import { EmployeeService } from '../../services/employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-update',
@@ -19,7 +20,8 @@ export class EmployeeUpdateComponent implements OnInit {
   
   constructor(private employeeService:EmployeeService,
     private router:Router,
-    private route:ActivatedRoute){}
+    private route:ActivatedRoute,
+    private toastrService:ToastrService){}
   
   ngOnInit(): void {
     this.getEmployeeById();
@@ -41,10 +43,11 @@ export class EmployeeUpdateComponent implements OnInit {
 
   update(){
     this.employeeService.updateEmployee(this.employeeModel).subscribe(() => {
+      this.toastrService.success(`${this.employeeModel.firstName} ${this.employeeModel.lastName} güncellendi`,"İşlem Başarılı!");
       this.router.navigate(['/employees']);
     },
     () => {
-      console.error('Güncelleme sırasında hata oluştu:');
+      this.toastrService.error("Employee güncellenemedi","Hata!");
     })
   }
 }

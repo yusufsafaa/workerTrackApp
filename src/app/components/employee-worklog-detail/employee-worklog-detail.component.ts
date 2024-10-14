@@ -3,6 +3,7 @@ import { WorklogModel } from '../../models/worklogModel';
 import { WorklogService } from '../../services/worklog.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-worklog-detail',
@@ -18,7 +19,8 @@ export class EmployeeWorklogDetailComponent implements OnInit{
   constructor(private worklogService:WorklogService,
     protected authService:AuthService,
     private route:ActivatedRoute,
-    private router:Router
+    private router:Router,
+    private toastrService:ToastrService
   ){}
 
   ngOnInit(): void {
@@ -37,11 +39,10 @@ export class EmployeeWorklogDetailComponent implements OnInit{
 
   deleteWorklog(id:number){
     this.worklogService.deleteWorklog(id).subscribe(() => {
-      console.log("Silindi");
+      this.toastrService.warning(`Id: ${id} numaralı iş kaydı silindi`,"İşlem Başarılı!")
     },
     (error) => {
-      console.log("Worklog silme işlemi sırasında hata!!"+` id:${id}`);
-      console.log(error);
+      this.toastrService.error(`İş kaydı silinemedi. Id:${id}`,"Hata!")
     })
   }
 

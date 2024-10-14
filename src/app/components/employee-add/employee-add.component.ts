@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
 import { EmployeeAddModel } from '../../models/employeeAddModel';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-employee-add',
@@ -17,15 +18,17 @@ export class EmployeeAddComponent {
   };
 
   constructor(private employeeService:EmployeeService,
-    private router:Router
+    private router:Router,
+    private toastrService:ToastrService
   ){}
 
   add(){
     this.employeeService.addEmployee(this.employeeModel).subscribe(() => {
+      this.toastrService.success(`${this.employeeModel.firstName} ${this.employeeModel.lastName} eklendi`,"İşlem Başarılı!");
       this.router.navigate(['/employees']);
     },
     () => {
-      console.error('Ekleme sırasında hata oluştu:');
+      this.toastrService.error("Employee eklenemedi","Hata!");
     })
   }
 }
