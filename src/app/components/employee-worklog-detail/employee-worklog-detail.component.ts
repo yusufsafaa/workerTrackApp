@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WorklogModel } from '../../models/worklogModel';
 import { WorklogService } from '../../services/worklog.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -17,7 +17,8 @@ export class EmployeeWorklogDetailComponent implements OnInit{
 
   constructor(private worklogService:WorklogService,
     protected authService:AuthService,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private router:Router
   ){}
 
   ngOnInit(): void {
@@ -42,6 +43,10 @@ export class EmployeeWorklogDetailComponent implements OnInit{
       console.log("Worklog silme işlemi sırasında hata!!"+` id:${id}`);
       console.log(error);
     })
+  }
+
+  updateWorklog(worklogId:number) {
+    this.router.navigate([`/worklogs/employee/${worklogId}/update`]);
   }
 
   openModal(employeeId: number){

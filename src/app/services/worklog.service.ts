@@ -22,4 +22,12 @@ export class WorklogService {
   addWorklogByEmployeeId(worklogModel:WorklogModel,employeeId:number){
     return this.httpClient.post(this.apiUrl+`/add?employeeId=${employeeId}`, worklogModel);
   }
+
+  updateWorklog(worklogModel:WorklogModel){
+    return this.httpClient.post(this.apiUrl+"/update", worklogModel);
+  }
+
+  getWorklogById(id:number):Observable<WorklogModel>{
+    return this.httpClient.get<WorklogModel>(this.apiUrl+`/getbyid?id=${id}`);
+  }
 }

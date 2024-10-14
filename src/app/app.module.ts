@@ -15,6 +15,7 @@ import { EmployeeUpdateComponent } from './components/employee-update/employee-u
 import { EmployeeAddComponent } from './components/employee-add/employee-add.component';
 import { EmployeeWorklogDetailComponent } from './components/employee-worklog-detail/employee-worklog-detail.component';
 import { EmployeeWorklogAddComponent } from './components/employee-worklog-add/employee-worklog-add.component';
+import { EmployeeWorklogUpdateComponent } from './components/employee-worklog-update/employee-worklog-update.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { EmployeeWorklogAddComponent } from './components/employee-worklog-add/e
     EmployeeUpdateComponent,
     EmployeeAddComponent,
     EmployeeWorklogDetailComponent,
-    EmployeeWorklogAddComponent
+    EmployeeWorklogAddComponent,
+    EmployeeWorklogUpdateComponent
   ],
   imports: [
     BrowserModule,

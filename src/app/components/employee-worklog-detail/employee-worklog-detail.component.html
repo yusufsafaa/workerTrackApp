@@ -22,7 +22,8 @@
                 <td>{{ worklog.overTime }}</td>
                 <td>{{ worklog.missingTime }}</td>
                 <td *ngIf="authService.hasRole('ADMIN')">
-                    <button class="btn btn-warning btn-sm me-2" (click)="openModal(worklog.id)">Sil</button>
+                    <button class="btn btn-warning btn-sm me-2" (click)="updateWorklog(worklog.id)">Düzenle</button>
+                    <button class="btn btn-danger btn-sm me-2" (click)="openModal(worklog.id)">Sil</button>
                 </td>
             </tr>
         </tbody>

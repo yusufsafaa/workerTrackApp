@@ -8,6 +8,7 @@ import { EmployeeUpdateComponent } from './components/employee-update/employee-u
 import { EmployeeAddComponent } from './components/employee-add/employee-add.component';
 import { EmployeeWorklogDetailComponent } from './components/employee-worklog-detail/employee-worklog-detail.component';
 import { EmployeeWorklogAddComponent } from './components/employee-worklog-add/employee-worklog-add.component';
+import { EmployeeWorklogUpdateComponent } from './components/employee-worklog-update/employee-worklog-update.component';
 
 const routes: Routes = [
   {path:'login', component:LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'worklogs', component:WorklogComponent, canActivate:[AuthGuard] },
   {path:'worklogs/employee/:employeeId', component:EmployeeWorklogDetailComponent, canActivate:[AuthGuard] },
   {path:'worklogs/employee/:employeeId/add', component:EmployeeWorklogAddComponent, canActivate:[AuthGuard], data:{expectedRole: 'ADMIN' } },
+  {path:'worklogs/employee/:worklogId/update', component:EmployeeWorklogUpdateComponent, canActivate:[AuthGuard], data:{expectedRole: 'ADMIN' } },
   {path:'', redirectTo:'/login', pathMatch:'full'}
 ];
 
