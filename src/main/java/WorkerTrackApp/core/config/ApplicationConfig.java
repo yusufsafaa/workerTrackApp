@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import WorkerTrackApp.entities.concretes.User;
 import WorkerTrackApp.repositories.abstracts.IUserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -30,8 +31,13 @@ public class ApplicationConfig {
 			
 			@Override
 			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-				return userRepository.findByUsername(username).
+				User user = userRepository.findByUsername(username).
 						orElseThrow(() -> new UsernameNotFoundException("No user found: "+username));
+								
+				return new org.springframework.security.core.userdetails.User(
+			            user.getUsername(),
+			            user.getPassword(),
+			            user.getAuthorities());
 			}
 		};
 	}

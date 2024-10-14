@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import WorkerTrackApp.entities.enums.RoleName;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -49,12 +50,12 @@ public class User implements UserDetails {
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_roles",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
     )
 	private Set<Role> roles = new HashSet<>();
 	
-	@OneToOne()
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "employee_id", nullable = true)
 	@EqualsAndHashCode.Exclude
 	private Employee employee;
@@ -64,7 +65,7 @@ public class User implements UserDetails {
 		Set<SimpleGrantedAuthority> authorities=new HashSet<>();
 		
 		for (Role role : roles) {
-			authorities.add(new SimpleGrantedAuthority(role.getName().toString()));
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName().toString()));
 		}
 		
 		return authorities;

@@ -20,7 +20,11 @@ public class JwtService {
 	private static final String SECRET_KEY = "7a13132aa93d968d0749a8f2c5519b401fc2b9947b08ad8d7f7daf47dc127870";
 	
 	public String generateToken(UserDetails userDetails) {
-		return generateToken(new HashMap<>(), userDetails);
+		Map<String, Object> extraClaims = new HashMap<>();
+        
+        extraClaims.put("roles", userDetails.getAuthorities()); 
+
+        return generateToken(extraClaims, userDetails);
 	}
 	
 	public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
