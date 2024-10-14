@@ -11,6 +11,7 @@ import WorkerTrackApp.business.abstracts.IWorkLogService;
 import WorkerTrackApp.entities.concretes.Employee;
 import WorkerTrackApp.entities.concretes.WorkLog;
 import WorkerTrackApp.entities.requests.WorklogAddRequest;
+import WorkerTrackApp.entities.requests.WorklogUpdateRequest;
 import WorkerTrackApp.repositories.abstracts.IEmployeeRepository;
 import WorkerTrackApp.repositories.abstracts.IWorkLogRepository;
 import lombok.AllArgsConstructor;
@@ -48,9 +49,21 @@ public class WorkLogManager implements IWorkLogService {
 	}
 
 	@Override
-	public WorkLog update(WorkLog workLog) {
-		return workLogRepository.save(workLog);
+	public WorkLog update(WorklogUpdateRequest request) {
+		Optional<WorkLog> workLogResult = workLogRepository.findById(request.getId());
 		
+		if(workLogResult.isPresent()){
+			WorkLog updatedWorklog = workLogResult.get();
+			updatedWorklog.setCheckInTime(request.getCheckInTime());
+			updatedWorklog.setChechOutTime(request.getChechOutTime());
+			updatedWorklog.setWorkDuration(request.getWorkDuration());
+			updatedWorklog.setOverTime(request.getOverTime());
+			updatedWorklog.setMissingTime(request.getMissingTime());
+			
+			return workLogRepository.save(updatedWorklog);
+		}
+		
+		return null;
 	}
 
 	@Override

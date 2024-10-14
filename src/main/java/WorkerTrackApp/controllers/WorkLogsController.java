@@ -1,6 +1,7 @@
 package WorkerTrackApp.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import WorkerTrackApp.business.abstracts.IWorkLogService;
 import WorkerTrackApp.entities.concretes.WorkLog;
 import WorkerTrackApp.entities.requests.WorklogAddRequest;
+import WorkerTrackApp.entities.requests.WorklogUpdateRequest;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -30,6 +32,16 @@ public class WorkLogsController {
 		List<WorkLog> result = workLogService.getLast7DaysWorkLogsByEmployeeId(employeeId);
 		
 		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getbyid")
+	public ResponseEntity<WorkLog> getWorklogById(@RequestParam int id){
+		Optional<WorkLog> result = workLogService.getWorkLogById(id);
+		
+		if(result.isPresent())
+			return new ResponseEntity<>(result.get(), HttpStatus.OK);
+		
+		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@DeleteMapping()
@@ -53,5 +65,17 @@ public class WorkLogsController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         
+    }
+	
+	@PostMapping("/update")
+    public ResponseEntity<WorkLog> updateWorklog(@RequestBody WorklogUpdateRequest worklogRequest) {
+        try {
+            WorkLog updatedWorklog = workLogService.update(worklogRequest);
+            return new ResponseEntity<>(updatedWorklog, HttpStatus.CREATED);
+        } 
+        catch (Exception exc) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }
