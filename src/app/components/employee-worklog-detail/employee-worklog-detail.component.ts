@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WorklogModel } from '../../models/worklogModel';
 import { WorklogService } from '../../services/worklog.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-employee-worklog-detail',
@@ -15,6 +16,7 @@ export class EmployeeWorklogDetailComponent implements OnInit{
   selectedWorklogId:number=0;
 
   constructor(private worklogService:WorklogService,
+    protected authService:AuthService,
     private route:ActivatedRoute
   ){}
 

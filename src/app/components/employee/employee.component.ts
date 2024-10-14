@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeDetails } from '../../models/employeeDetails';
 import { EmployeeService } from '../../services/employee.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-employee',
@@ -14,6 +15,7 @@ export class EmployeeComponent implements OnInit {
   isModalOpen= false;
 
   constructor(private employeeService:EmployeeService,
+    protected authService:AuthService,
     private route:Router
   ){}
   

@@ -11,12 +11,12 @@ import { EmployeeWorklogAddComponent } from './components/employee-worklog-add/e
 
 const routes: Routes = [
   {path:'login', component:LoginComponent},
-  {path:'employees', component:EmployeeComponent, canActivate:[AuthGuard] },
-  {path:'employees/update/:id', component:EmployeeUpdateComponent, canActivate:[AuthGuard] },
-  {path:'employees/add', component:EmployeeAddComponent, canActivate:[AuthGuard] },
+  {path:'employees', component:EmployeeComponent, canActivate:[AuthGuard]},
+  {path:'employees/update/:id', component:EmployeeUpdateComponent, canActivate:[AuthGuard], data:{expectedRole: 'ADMIN' }},
+  {path:'employees/add', component:EmployeeAddComponent, canActivate:[AuthGuard], data:{expectedRole: 'ADMIN' } },
   {path:'worklogs', component:WorklogComponent, canActivate:[AuthGuard] },
   {path:'worklogs/employee/:employeeId', component:EmployeeWorklogDetailComponent, canActivate:[AuthGuard] },
-  {path:'worklogs/employee/:employeeId/add', component:EmployeeWorklogAddComponent, canActivate:[AuthGuard] },
+  {path:'worklogs/employee/:employeeId/add', component:EmployeeWorklogAddComponent, canActivate:[AuthGuard], data:{expectedRole: 'ADMIN' } },
   {path:'', redirectTo:'/login', pathMatch:'full'}
 ];
 
