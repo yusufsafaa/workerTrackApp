@@ -19,7 +19,7 @@ export class EmployeeAddComponent {
 
   constructor(private employeeService:EmployeeService,
     private router:Router,
-    private toastrService:ToastrService
+    private toastrService: ToastrService
   ){}
 
   add(){

@@ -10,8 +10,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './worklog.component.css'
 })
 export class WorklogComponent {
-  selectedYear:number=0;
-  selectedMonth:number=0;
+  selectedYear:number=2024;
+  selectedMonth:number=9;
   employeeWorklogs:EmployeeWorklogsDetails[]=[];
   
   months = [
@@ -45,6 +45,13 @@ export class WorklogComponent {
 
   getEmployeeWorklogDetails(employeeId:number){
     this.route.navigate([`/worklogs/employee/${employeeId}`]);
+  }
+
+  calculateWorkTime(workTime:number){
+    const hour = Math.floor(workTime/60)
+    const minute = workTime%60
+
+    return (`${hour} saat ${minute} dakika`);
   }
 
 }

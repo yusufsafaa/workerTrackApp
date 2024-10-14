@@ -27,7 +27,7 @@ export class EmployeeWorklogAddComponent implements OnInit{
     this.worklogService.addWorklogByEmployeeId(this.worklogModel,this.employeeId).subscribe((response) => {
       this.toastrService.success("İş kaydı oluşturuldu","İşlem Başarılı!");
       this.goToWorklogDetailsBack();
-    },
+    } ,
     (error) => {
       this.toastrService.error("İş kaydı eklenemedi","Hata!");
     })

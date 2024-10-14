@@ -32,7 +32,7 @@ export class EmployeeWorklogUpdateComponent implements OnInit{
   getCurrentWorklog(){
     this.worklogService.getWorklogById(this.worklogModel.id).subscribe((data) => {
       this.worklogModel=data;
-    })
+    } )
   }
 
   update(){

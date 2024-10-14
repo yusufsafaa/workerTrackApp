@@ -24,7 +24,7 @@
                 <th>Birim</th>
                 <th>Birim Telefonu</th>
                 <th>Toplam Çalışılan Gün</th>
-                <th>Toplam Çalışılan Dakika</th>
+                <th>Toplam Çalışılan Zaman</th>
                 <th>Eksik Çalışılan Dakika</th>
                 <th>Fazladan Çalışılan Dakika</th>
                 <th>İşlemler</th>
@@ -36,7 +36,7 @@
                 <td>{{ employee.departmentName }}</td>
                 <td>{{ employee.departmentPhoneNumber }}</td>
                 <td>{{ employee.totalWorkedDays }}</td>
-                <td>{{ employee.totalWorkedMin }}</td>
+                <td>{{calculateWorkTime(employee.totalWorkedMin)}}</td>
                 <td>{{ employee.totalMissingMin }}</td>
                 <td>{{ employee.totalExtraMin }}</td>
                 <td>

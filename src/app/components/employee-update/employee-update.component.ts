@@ -32,7 +32,7 @@ export class EmployeeUpdateComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
       this.employeeService.getEmployeeById(id).subscribe((data: EmployeeModel) => {
-          this.employeeModel = data;
+          this.employeeModel= data;
         },
         () => {
           console.error('Çalışan verisi alınırken hata!');

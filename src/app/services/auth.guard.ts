@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, 
-    private router: Router) {}
+    private router: Router,
+    private toastrService:ToastrService) {}
 
   canActivate(route: ActivatedRouteSnapshot):boolean {
     const token = this.authService.getToken();
@@ -19,7 +21,7 @@ export class AuthGuard implements CanActivate {
 
     const expectedRole = route.data['expectedRole'];
     if(expectedRole && !this.authService.hasRole(expectedRole)){
-      console.log("Sayfaya erişim izniniz bulunmamaktadır!!");
+      this.toastrService.warning("Sayfaya erişim izniniz bulunmamaktadır!","Hata!")
       this.router.navigate(["/employees"]);
       return false;
     }
