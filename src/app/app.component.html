@@ -1,0 +1,35 @@
+<ng-container *ngIf="!isLoginPage()">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/employees">Şirket Yönetimi</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/employees">Çalışanlar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/worklogs">Aylık Çalışan Kontrolü</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <span class="navbar-text text-light me-3">Hoşgeldiniz, {{ authService.getUsername() }}  </span>
+          <button class="btn btn-outline-danger" routerLink="/login" (click)="logout()" type="button">Çıkış Yap</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 WorkerTrackApp</p>
+  </footer>
+</ng-container>
+
+<router-outlet *ngIf="isLoginPage()"></router-outlet> 

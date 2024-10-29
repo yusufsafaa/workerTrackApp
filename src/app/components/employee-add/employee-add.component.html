@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Çalışan Ekle</h2>
+    
+    <form (ngSubmit)="add()" #addEmployeeForm="ngForm">
+      <div class="form-group">
+        <label for="firstName">Ad</label>
+        <input type="text" id="firstName" class="form-control" [(ngModel)]="employeeModel.firstName" name="firstName" required/>
+      </div>
+      
+      <div class="form-group">
+        <label for="lastName">Soyad</label>
+        <input type="text" id="lastName" class="form-control" [(ngModel)]="employeeModel.lastName" name="lastName" required/>
+      </div>
+      
+      <div class="form-group">
+        <label for="departmentId">Birim Id</label>
+        <input type="number" id="departmentId" class="form-control" [(ngModel)]="employeeModel.departmentId" name="departmentId" required/>
+      </div>
+      
+      <div class="form-group">
+        <label for="startDate">İşe Giriş Tarihi</label>
+        <input type="date" id="startDate" class="form-control" [(ngModel)]="employeeModel.startDate" name="startDate" required/>
+      </div>
+      
+      <button type="submit" class="btn btn-primary mt-3" [disabled]="!addEmployeeForm.form.valid">Ekle</button>
+    </form>
+  </div>
+  
